@@ -32,7 +32,7 @@ SST_array = linspace(280,305,6); % Surface temperature space
 for iSST = 1:6, SST = SST_array(iSST);
     load(['MAT_DATA/RCI',num2str(SST),'K_Modified_base_state.mat'],'T','z','p');
     T_mult(iSST,:) = T;
-end
+end; p_equal = p; % p coordinate with equal increments (dp)
 
 % 1.3 Load Ozone profile (ppmv)
 load('MAT_DATA/SAM_O3_ppmv.mat'); % Load Ozone profile (in ppmv)
@@ -42,7 +42,7 @@ F = figure('position',[100 100 1000 400]);
 
 %%% 2.1 Plot specific humidity profile
 SUB1 = subplot(1,4,1);
-for iSST = 1:6, P = plot(1e3*squeeze(QV_mult(iSST,3,:)),p,'Linewidth',lw,'color',...
+for iSST = 1:6, P = plot(1e3*squeeze(QV_mult(iSST,3,:)),p_equal,'Linewidth',lw,'color',...
         Cmap(iSST,:)); grid on; hold on;
     if iSST==5, P.LineWidth = 2*lw; end
 end
@@ -55,7 +55,7 @@ set(SUB1,'Ydir','reverse','TickLabelInterpreter','Latex','Box','on','TickDir','o
 
 %%% 2.2 Plot temperature profile
 SUB2 = subplot(1,4,2);
-for iSST = 1:6, P = plot(T_mult(iSST,:),p,'Linewidth',lw,'color',...
+for iSST = 1:6, P = plot(T_mult(iSST,:),p_equal,'Linewidth',lw,'color',...
         Cmap(iSST,:)); grid on; hold on;
     if iSST==5, P.LineWidth = 2*lw; end
 end
@@ -66,7 +66,7 @@ set(SUB2,'Ydir','reverse','TickLabelInterpreter','Latex','Box','on','TickDir','o
 %%% 2.3 Plot alpha profile
 SUB3 = subplot(1,4,3);
 TOPLOT = squeeze(alpha_mult(:,3,:)); TOPLOT(TOPLOT<0) = 0; % Only plot al>0
-for iSST = 1:6, P = plot(TOPLOT(iSST,2:end),p(2:end),'Linewidth',lw,...
+for iSST = 1:6, P = plot(TOPLOT(iSST,2:end),p_equal(2:end),'Linewidth',lw,...
         'color',Cmap(iSST,:)); grid on; hold on;
     if iSST==5, P.LineWidth = 2*lw; end
 end
