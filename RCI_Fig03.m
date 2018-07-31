@@ -159,7 +159,7 @@ thisfile  = which(mfilename);
 basedir = thisfile(1:strfind(thisfile,mfilename)-1);
 gcfsavepdf([basedir 'PDF_DATA\RCI_Fig03.pdf']);
 
-else disp('The data for this figure was provided by Zhiming Kuang and is not be provided here.');
+else disp('The data for this figure was provided by Zhiming Kuang and is not provided here.');
     disp('The reference is "Kuang (2012) Weakly Forced Mock Walker Cells, JAS".');
     disp('The corresponding authors email is kuang@fas.harvard.edu');
 end
